@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================================
+   CUSTOM FONTS
+====================================== */
+
+/* ======================================
+   CSS VARIABLES
+====================================== */
+:root {
+  --background: #050816;
+  --primary: #7C3AED;
+  --secondary: #00F5FF;
+  --accent: #FF00FF;
+  --success: #22C55E;
+  --warning: #F59E0B;
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 20px;
+
+  --neon-purple: 0 0 20px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.2);
+  --neon-cyan: 0 0 20px rgba(0, 245, 255, 0.6), 0 0 60px rgba(0, 245, 255, 0.2);
+  --neon-pink: 0 0 20px rgba(255, 0, 255, 0.6), 0 0 60px rgba(255, 0, 255, 0.2);
+
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ======================================
+   BASE STYLES
+====================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  background-color: var(--background);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lenis Smooth Scroll */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ======================================
+   CUSTOM SCROLLBAR
+====================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #7C3AED, #00F5FF);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #9d5cf4, #33f7ff);
+}
+
+/* ======================================
+   CUSTOM CURSOR
+====================================== */
+#cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+/* ======================================
+   GLASSMORPHISM UTILITIES
+====================================== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.glass-card:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%);
+  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: var(--neon-purple), 0 25px 50px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+}
+
+/* ======================================
+   NEON EFFECTS
+====================================== */
+.neon-text-purple {
+  color: #7C3AED;
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.8), 0 0 30px rgba(124, 58, 237, 0.4);
+}
+
+.neon-text-cyan {
+  color: #00F5FF;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.8), 0 0 30px rgba(0, 245, 255, 0.4);
+}
+
+.neon-text-pink {
+  color: #FF00FF;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.4);
+}
+
+.neon-border-purple {
+  border: 1px solid rgba(124, 58, 237, 0.5);
+  box-shadow: var(--neon-purple), inset 0 0 20px rgba(124, 58, 237, 0.05);
+}
+
+.neon-border-cyan {
+  border: 1px solid rgba(0, 245, 255, 0.5);
+  box-shadow: var(--neon-cyan), inset 0 0 20px rgba(0, 245, 255, 0.05);
+}
+
+/* ======================================
+   GRADIENT TEXT
+====================================== */
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED, #00F5FF, #FF00FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: gradientShift 4s linear infinite;
+}
+
+.gradient-text-purple-cyan {
+  background: linear-gradient(135deg, #7C3AED, #00F5FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ======================================
+   AURORA BACKGROUND
+====================================== */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(124, 58, 237, 0.15),
+    rgba(0, 245, 255, 0.1),
+    rgba(255, 0, 255, 0.1),
+    rgba(124, 58, 237, 0.15)
+  );
+  animation: auroraRotate 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes auroraRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ======================================
+   FLOATING PARTICLES
+====================================== */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ======================================
+   MAGNETIC BUTTON
+====================================== */
+.magnetic-btn {
+  position: relative;
+  transition: transform 0.3s var(--transition-spring);
+  cursor: pointer;
+}
+
+/* ======================================
+   PREMIUM BUTTON STYLES
+====================================== */
+.btn-primary {
+  position: relative;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #7C3AED, #5a1eb5);
+  border: 1px solid rgba(124, 58, 237, 0.5);
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--neon-purple);
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.8);
+}
+
+.btn-secondary {
+  position: relative;
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid rgba(0, 245, 255, 0.5);
+  border-radius: 12px;
+  color: #00F5FF;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 245, 255, 0.1);
+  box-shadow: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+/* ======================================
+   PRODUCT CARD 3D TILT
+====================================== */
+.product-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--transition-spring);
+  perspective: 1000px;
+}
+
+.product-card-3d:hover {
+  box-shadow: var(--neon-purple), 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ======================================
+   SHIMMER LOADING
+====================================== */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ======================================
+   HERO SECTION
+====================================== */
+.hero-gradient {
+  background: radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.2) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(0, 245, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 60% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+}
+
+/* ======================================
+   SECTION DIVIDER
+====================================== */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), rgba(0, 245, 255, 0.5), transparent);
+}
+
+/* ======================================
+   RATING STARS
+====================================== */
+.star-filled { color: #F59E0B; }
+.star-empty { color: rgba(245, 158, 11, 0.3); }
+
+/* ======================================
+   BADGE STYLES
+====================================== */
+.badge-new {
+  background: linear-gradient(135deg, #22C55E, #16a34a);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-hot {
+  background: linear-gradient(135deg, #FF00FF, #c026d3);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-sale {
+  background: linear-gradient(135deg, #F59E0B, #d97706);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ======================================
+   TOAST NOTIFICATIONS
+====================================== */
+.Toaster {
+  z-index: 99999 !important;
+}
+
+/* ======================================
+   CART DRAWER
+====================================== */
+.cart-drawer {
+  background: linear-gradient(180deg, #0d0d2b 0%, #050816 100%);
+  border-left: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+/* ======================================
+   FORM STYLES
+====================================== */
+.form-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  background: rgba(124, 58, 237, 0.05);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ======================================
+   PRICE DISPLAY
+====================================== */
+.price-original {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+}
+
+.price-offer {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00F5FF, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-discount {
+  color: #22C55E;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ======================================
+   ORDER TIMELINE
+====================================== */
+.timeline-step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 44px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: linear-gradient(to bottom, #7C3AED, transparent);
+}
+
+.timeline-step:last-child::before {
+  display: none;
+}
+
+/* ======================================
+   NAVIGATION
+====================================== */
+.nav-blur {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background: rgba(5, 8, 22, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ======================================
+   HERO TEXT ANIMATIONS
+====================================== */
+.hero-title {
+  font-family: 'ClashDisplay', sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero-subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+}
+
+/* ======================================
+   CATEGORY CARDS
+====================================== */
+.category-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.5s var(--transition-spring);
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(0,245,255,0.3)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.category-card:hover::after {
+  opacity: 1;
+}
+
+.category-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--neon-purple), 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ======================================
+   REVIEW CARDS
+====================================== */
+.review-card {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(0, 245, 255, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: all 0.4s ease;
+}
+
+.review-card:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: var(--neon-purple);
+  transform: translateY(-4px);
+}
+
+/* ======================================
+   TUNNEL CTA EFFECT
+====================================== */
+.tunnel-bg {
+  background: radial-gradient(ellipse at 50% 50%, rgba(124, 58, 237, 0.3) 0%, rgba(0, 245, 255, 0.1) 30%, transparent 70%);
+}
+
+/* ======================================
+   THREE.JS CANVAS
+====================================== */
+canvas {
+  display: block;
+}
+
+/* ======================================
+   SELECTION COLOR
+====================================== */
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: white;
+}
+
+/* ======================================
+   FOCUS VISIBLE
+====================================== */
+:focus-visible {
+  outline: 2px solid #7C3AED;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ======================================
+   ADMIN TABLE
+====================================== */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.admin-table th {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.admin-table td {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.admin-table tr:hover td {
+  background: rgba(124, 58, 237, 0.05);
+  border-color: rgba(124, 58, 237, 0.1);
+}
+
+/* ======================================
+   RESPONSIVE UTILITIES
+====================================== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .glass-card {
+    border-radius: 16px;
+  }
+}
+
+/* ======================================
+   LOADING SPINNER
+====================================== */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(124, 58, 237, 0.2);
+  border-top-color: #7C3AED;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ======================================
+   PAGE TRANSITIONS
+====================================== */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s var(--transition-smooth);
+}
+
+/* ======================================
+   GRID LINES BACKGROUND
+====================================== */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
