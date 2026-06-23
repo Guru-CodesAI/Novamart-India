@@ -38,7 +38,7 @@ interface ShopClientProps {
 export default function ShopClient({ initialProducts, initialCategories }: ShopClientProps) {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [priceRange, setPriceRange] = useState<{ min: number; max: number } | null>(null);
+  const [priceRange, setPriceRange] = useState<{ label: string; min: number; max: number } | null>(null);
   const [minRating, setMinRating] = useState(0);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [discountOnly, setDiscountOnly] = useState(false);
